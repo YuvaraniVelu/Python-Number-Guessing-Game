@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python Guessing Game</title>
+    <style>
+        #end {
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+          body{
+            font-family:comic sans ms;
+        }
+        body.congrats {
+            background-image: url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700336441.jpg');
+            animation: congrats-animation 5s;
+          }
+          
+          @keyframes congrats-animation {
+            0% { background-position: 0 0; }
+            50% { background-position: 50% 0; }
+            100% { background-position: 0 0; }
+          }
+    </style>
+</head>
+<!--style="background-image:url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700336441.jpg');-->>
+<body style="background-image:url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700336189.jpg');">
+    <center><h1 style="font-size:450%;">Welcome to Number Guessing Game</h1></center>
+    <form method="post" action='guess' style="font-size:250%;">
+        {% csrf_token %}
+        <center><label for="guess">Enter a value between 1 and 100: </center></label><br>
+        <center><input text="number" id="guess" name="guess"></center>
+        <center><input type="submit" value="Guess"></center>
+    </form>
+    <center><p style="color: {% if result|stringformat:"s" == "Congrats, You have guessed the number!!!" %} green {% else %} red {% endif %}">{{ result }}</p></center>
+
+    <div id='end'>
+    <p><i>Thank you for playing!!!<i></p>
+    <center><p><i>-Yuva</i> &#128516;</p></center>
+    </div>
+    <script>
+        var body = document.querySelector('body');
+        if ("{{ result }}" == 'Congrats, You have guessed the number!!!') {
+
+        body.classList.add('congrats');
+        }
+    </script>
+</body>
+</html>
